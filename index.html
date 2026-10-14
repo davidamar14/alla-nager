@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>אללה נגר - Pov: נגמר לי כל הטוקנים</title>
+  
+  <!-- Open Graph / WhatsApp / Telegram Preview -->
+  <meta property="og:title" content="אללה נגר 🔥">
+  <meta property="og:description" content="Pov: נגמר לי כל הטוקנים">
+  <meta property="og:image" content="https://files.catbox.moe/7u53nx.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://files.catbox.moe/7u53nx.png">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: radial-gradient(circle at center, #1a1a24 0%, #09090c 100%);
+      color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+      position: relative;
+      padding: 20px 10px;
+    }
+
+    /* Dramatic Loader that disappears */
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: #09090c;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+
+    #loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .spinner {
+      width: 55px;
+      height: 55px;
+      border: 4px solid rgba(255, 255, 255, 0.1);
+      border-top-color: #f59e0b;
+      border-right-color: #ef4444;
+      border-radius: 50%;
+      animation: spin 0.75s linear infinite;
+      margin-bottom: 18px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .loader-text {
+      font-size: 1.15rem;
+      color: #cbd5e1;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    /* Main Container */
+    .container {
+      text-align: center;
+      max-width: 500px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    /* Animated Bold Title "אללה נגר" */
+    .animated-title {
+      font-size: clamp(2.5rem, 8vw, 4rem);
+      font-weight: 900;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #ff416c, #ff4b2b, #ffb300, #ff416c);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      opacity: 0;
+      transform: scale(0.3) translateY(-40px);
+      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease;
+      filter: drop-shadow(0 0 15px rgba(255, 75, 43, 0.6));
+    }
+
+    .animated-title.popup {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+      animation: gradientFlow 3s ease infinite, titleBounce 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes titleBounce {
+      0% {
+        transform: scale(1) translateY(0);
+        filter: drop-shadow(0 0 15px rgba(255, 75, 43, 0.6));
+      }
+      100% {
+        transform: scale(1.08) translateY(-6px);
+        filter: drop-shadow(0 0 30px rgba(255, 179, 0, 0.9));
+      }
+    }
+
+    /* Main Meme Card & Popup */
+    .meme-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 26px;
+      padding: 14px;
+      box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.8), 0 0 35px rgba(255, 75, 43, 0.25);
+      opacity: 0;
+      transform: scale(0.2) rotate(-6deg);
+      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease;
+      width: 100%;
+    }
+
+    .meme-card.popup {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+      animation: cardGlow 3.5s infinite alternate ease-in-out;
+    }
+
+    @keyframes cardGlow {
+      0% {
+        box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.8), 0 0 25px rgba(255, 75, 43, 0.3);
+      }
+      100% {
+        box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.8), 0 0 45px rgba(255, 179, 0, 0.5);
+      }
+    }
+
+    .meme-img {
+      width: 100%;
+      height: auto;
+      border-radius: 20px;
+      display: block;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    }
+
+    /* Action Buttons */
+    .actions {
+      margin-top: 22px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease 0.4s, transform 0.5s ease 0.4s;
+      width: 100%;
+    }
+
+    .container.loaded .actions {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .btn {
+      background: linear-gradient(135deg, #ff4b2b, #ff416c);
+      color: white;
+      border: none;
+      padding: 12px 26px;
+      border-radius: 14px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.15s, box-shadow 0.2s, background 0.2s;
+      text-decoration: none;
+      box-shadow: 0 6px 20px rgba(255, 75, 43, 0.35);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(255, 75, 43, 0.5);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: none;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.18);
+      box-shadow: 0 6px 20px rgba(255, 255, 255, 0.1);
+    }
+
+    /* Toast Notification */
+    #toast {
+      position: fixed;
+      bottom: 25px;
+      background: #10b981;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: bold;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.3s, transform 0.3s;
+      pointer-events: none;
+      z-index: 200;
+      box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+    }
+
+    #toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Loading suspense before the pop-up -->
+  <div id="loader">
+    <div class="spinner"></div>
+    <div class="loader-text">טוען הודעה מיוחדת...</div>
+  </div>
+
+  <div class="container" id="mainContainer">
+    <!-- Animated bold title above image -->
+    <h1 class="animated-title" id="titleHeader">אללה נגר</h1>
+
+    <!-- Meme Card Popup -->
+    <div class="meme-card" id="memeCard">
+      <img src="https://files.catbox.moe/7u53nx.png" alt="Pov: נגמר לי כל הטוקנים" class="meme-img" id="memeImage">
+    </div>
+
+    <!-- Actions -->
+    <div class="actions">
+      <button class="btn" onclick="copyLink()">
+        📋 העתק קישור לשיתוף
+      </button>
+      <a href="https://files.catbox.moe/7u53nx.png" target="_blank" class="btn btn-secondary">
+        🔗 פתח תמונה ישירה
+      </a>
+    </div>
+  </div>
+
+  <div id="toast">הקישור הועתק בהצלחה! 🚀</div>
+
+  <script>
+    // Dramatic sound effect using Web Audio API
+    function playDramaticSound() {
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        const ctx = new AudioCtx();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(160, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(45, ctx.currentTime + 0.6);
+
+        gain.gain.setValueAtTime(0.35, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.6);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start();
+        osc.stop(ctx.currentTime + 0.6);
+      } catch (e) {
+        // Handled silently if autoplay restricted
+      }
+    }
+
+    // Trigger Popup animation
+    window.addEventListener('DOMContentLoaded', () => {
+      const loader = document.getElementById('loader');
+      const titleHeader = document.getElementById('titleHeader');
+      const memeCard = document.getElementById('memeCard');
+      const container = document.getElementById('mainContainer');
+
+      setTimeout(() => {
+        loader.classList.add('hidden');
+        setTimeout(() => {
+          titleHeader.classList.add('popup');
+          memeCard.classList.add('popup');
+          container.classList.add('loaded');
+          playDramaticSound();
+        }, 150);
+      }, 700);
+    });
+
+    // Copy link function
+    function copyLink() {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        const toast = document.getElementById('toast');
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2500);
+      }).catch(() => {
+        alert("הקישור: " + window.location.href);
+      });
+    }
+  </script>
+</body>
+</html>
